@@ -1,4 +1,4 @@
-#パーセプトロンと論理回路
+#perceptron and logic gate
 
 def AND(x1, x2):
     b = -0.7

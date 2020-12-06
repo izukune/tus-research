@@ -1,3 +1,6 @@
+###Yoshiki Izukune###
+###OperationCheck::2020/12/6/18:00
+
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -7,18 +10,17 @@ correct_data = np.sin(input_data) + np.cos(input_data)
 n_data = len(correct_data)
 
 n_in = 1
-n_mid = 3
+n_mid = 4
 n_out = 1
 
-wb_width = 0.01
 eta = 0.1
 epoch = 2001
 interval = 200
 
 class MiddleLayer:
     def __init__(self, n_upper, n):
-        self.w = wb_width * np.random.randn(n_upper, n)
-        self.b = wb_width * np.random.randn(n)
+        self.w = np.random.randn(n_upper, n)
+        self.b = np.random.randn(n)
 
     def forward(self, x):
         self.x = x
@@ -26,7 +28,7 @@ class MiddleLayer:
         self.y = 1/(1+np.exp(-u))
     
     def backward(self, grad_y):
-        delta = grad_y * (1-self.y)*self.y
+        delta = grad_y * (1-self.y) * self.y
         
         self.grad_w = np.dot(self.x.T, delta)
         self.grad_b = np.sum(delta, axis=0)
@@ -39,8 +41,8 @@ class MiddleLayer:
 
 class OutputLayer:
     def __init__(self, n_upper, n):
-        self.w = wb_width * np.random.randn(n_upper, n)
-        self.b = wb_width * np.random.randn(n)
+        self.w = np.random.randn(n_upper, n)
+        self.b = np.random.randn(n)
     
     def forward(self, x):
         self.x = x
@@ -102,7 +104,7 @@ if __name__ == "__main__":
                 plot_y.append(y)
                 
         if i%interval == 0:
-            plt.scatter(plot_x, plot_y, marker="+")
+            plt.scatter(plot_x, plot_y, marker="o")
             plt.show()
             print("---------------------------------------------------------------------------------")
             print("w(ini => mid)")

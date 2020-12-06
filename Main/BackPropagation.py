@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 
 input_data = np.arange(0, np.pi*2, 0.1) 
-correct_data = np.sin(input_data)
-input_data = (input_data-np.pi)/np.pi
+correct_data = np.sin(input_data) + np.cos(input_data)
 n_data = len(correct_data)
 
 n_in = 1
@@ -105,7 +104,19 @@ if __name__ == "__main__":
         if i%interval == 0:
             plt.scatter(plot_x, plot_y, marker="+")
             plt.show()
-            
+            print("---------------------------------------------------------------------------------")
+            print("w(ini => mid)")
+            print(middle_layer.w)
+            print("---------------------------------------------")
+            print("b(ini => mid)")
+            print(middle_layer.b)
+            print("---------------------------------------------")
+            print("w(mid => out)")
+            print(output_layer.w)
+            print("---------------------------------------------")
+            print("b(mid => out)")
+            print(output_layer.b)
+
             print("Epoch:" + str(i) + "/" + str(epoch), "Error:" + str(total_error/n_data))
             writer.writerow([i, total_error/n_data])
 

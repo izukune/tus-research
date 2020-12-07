@@ -1,6 +1,5 @@
 ###Yoshiki Izukune###
-###OperationCheck::2020/12/6/18:00
-
+###OperationCheck::2020/12/6/18:00::
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -14,8 +13,8 @@ n_mid = 4
 n_out = 1
 
 eta = 0.1
-epoch = 2001
-interval = 200
+epoch = 1001
+interval = 100
 
 class MiddleLayer:
     def __init__(self, n_upper, n):
@@ -29,11 +28,9 @@ class MiddleLayer:
     
     def backward(self, grad_y):
         delta = grad_y * (1-self.y) * self.y
-        
         self.grad_w = np.dot(self.x.T, delta)
         self.grad_b = np.sum(delta, axis=0)
-        
-        self.grad_x = np.dot(delta, self.w.T) 
+        self.grad_x = np.dot(delta, self.w.T)
         
     def update(self, eta):
         self.w -= eta * self.grad_w
@@ -51,10 +48,8 @@ class OutputLayer:
     
     def backward(self, t):
         delta = self.y - t
-        
         self.grad_w = np.dot(self.x.T, delta)
         self.grad_b = np.sum(delta, axis=0)
-        
         self.grad_x = np.dot(delta, self.w.T) 
 
     def update(self, eta):
@@ -69,7 +64,6 @@ if __name__ == "__main__":
     outfile = open('output3.csv','w', newline='')
     writer = csv.writer(outfile)
     writer.writerow(['epoch', 'Loss'])
-
 
     for i in range(epoch):
 
